@@ -4,7 +4,8 @@ from django.urls import reverse
 from django.core.validators import MinLengthValidator, MaxLengthValidator
 from functools import cached_property
 from mptt.models import MPTTModel, TreeForeignKey
-from mptt.fields import TreeManyToManyField
+from mptt.fields import TreeForeignKey as TreeForeignKeyField
+from django.utils.text import slugify
 
 
 # Create your models here.
@@ -46,8 +47,10 @@ class Product(models.Model):
     slug = models.SlugField(
         _("Slug"), max_length=255, unique=True, help_text=_("Product Slug")
     )
-    categories = TreeManyToManyField(
+    category = TreeForeignKeyField(
         Category,
+        on_delete=models.SET_NULL,
+        null=True,
         help_text=_("Product Categories"),
         related_name="products",
     )
@@ -85,6 +88,10 @@ class Product(models.Model):
 
     objects = models.manager.Manager()
     active = ProductActiveManager()
+
+    def save(self, *args, **kwargs) -> None:
+        self.slug = slugify(self.title, allow_unicode=True)
+        super().save(*args, **kwargs)
 
     class Meta:
         ordering = ["-created_at"]

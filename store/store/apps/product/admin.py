@@ -15,5 +15,5 @@ class CategoryMPTTAdmin(DraggableMPTTAdmin):
 class ProductAdmin(ModelAdmin):
     list_display = ["title", "sale_price", "qty", "is_active"]
     search_fields = ["title"]
-    list_filter = ["created_at"]
+    list_filter = ["created_at", "is_active"]
     prepopulated_fields = {"slug": ["title"]}
