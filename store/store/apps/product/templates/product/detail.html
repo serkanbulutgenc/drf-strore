@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load mptt_tags %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <nav style="--bs-breadcrumb-divider: url(&#34;
+                                    data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;
+                                    )"
+                             aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                {% for cat in product.categories.all %}
+                                    <li class="breadcrumb-item">
+                                        <a href="/{{ cat.slug }}">{{ cat }}</a>
+                                    </li>
+                                {% endfor %}
+                                <!--<li class="breadcrumb-item active" aria-current="page">Library</li>-->
+                            </ol>
+                        </nav>
+                        <h5 class="card-title">{{ product.title }}</h5>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <p>
+                            {% for cat in product.categories.all %}<span class="badge text-bg-secondary badge-sm">{{ cat }}</span>{% endfor %}
+                        </p>
+                        <a href="{% url 'product-web:update' product.id %}"
+                           class="btn btn-secondary btn-sm">Update</a>
+                        <a href="#" class="btn btn-danger btn-sm">Delete</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

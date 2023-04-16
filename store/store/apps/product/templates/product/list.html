@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="card-group">
+                {% for product in products %}
+                    <div class="card">
+                        <a href="{% url 'product-web:detail' product.id %}"
+                           class="text-decoration-none">
+                            <img src="https://picsum.photos/200/300"
+                                 class="card-img-top"
+                                 alt="{{ product.title }}">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ product.title }}</h5>
+                                <p class="card-text text-muted">
+                                    This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
+                                </p>
+                            </div>
+                        </a>
+                        <div class="card-footer">
+                            <small class="text-body-secondary">{{ product.updated_at }}</small>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <!--<div class="col">
+                    <div class="card mb-3" style="max-width: 540px;">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img src="https://picsum.photos/200/300"
+                                     class="img-fluid rounded-start"
+                                     alt="...">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ product.title }}</h5>
+                                    <p class="card-text">
+                                        This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
+                                    </p>
+                                    <p class="card-text">
+                                        <small class="text-body-secondary">{{ product.updated_at }}</small>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>-->
+        </div>
+    </div>
+{% endblock content %}
