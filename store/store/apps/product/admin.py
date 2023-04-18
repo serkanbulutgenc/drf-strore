@@ -1,8 +1,15 @@
 from django.contrib.admin import register, ModelAdmin
 from mptt.admin import DraggableMPTTAdmin
-from .models import Product, Category
+from .models import Product, Category, Brand
 
 # Register your models here.
+
+
+@register(Brand)
+class BrandAdmin(ModelAdmin):
+    list_display = ["name"]
+    search_fields = ["name"]
+    prepopulated_fields = {"slug": ["name"]}
 
 
 @register(Category)

@@ -9,6 +9,19 @@ from django.utils.text import slugify
 
 
 # Create your models here.
+class Brand(models.Model):
+    name = models.CharField(_("Name"), max_length=50, help_text=_("Brand Name"))
+    slug = models.SlugField(_("Slug"), max_length=50, help_text=_("Brand Slug"))
+    created_at = models.DateTimeField(_("Created At"), auto_now_add=True, editable=False)
+    updated_at = models.DateTimeField(_("Updated At"), auto_now=True, editable=False)
+
+    def __str__(self):
+        return f"{self.name}"
+
+    class Meta:
+        ordering = ["-created_at"]
+
+
 class Category(MPTTModel):
     name = models.CharField(_("Name"), max_length=50, help_text=_("Category Name"))
     slug = models.SlugField(
@@ -54,6 +67,14 @@ class Product(models.Model):
         help_text=_("Product Categories"),
         related_name="products",
     )
+    brand = models.ForeignKey(
+        Brand,
+        on_delete=models.SET_NULL,
+        null=True,
+        related_name="brand",
+        help_text=_("Product Brand"),
+    )
+
     description = models.TextField(
         _("Description"),
         null=True,

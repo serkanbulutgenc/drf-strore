@@ -2,7 +2,13 @@
 {% load static %}
 {% block content %}
     <div class="container">
-        <div class="row row-cols-5 g-2">            
+        <div class="row">
+            <div class="col my-2">
+                <h1 class="text-secondary">Products</h1>
+            </div>
+        </div>
+        <hr/>
+        <div class="g-2 row row-cols-1 row-cols-lg-5 row-cols-md-3 row-cols-sm-2">            
                 {% for product in products %}
                 <div class="col">
                     <div class="card">
@@ -12,7 +18,7 @@
                                  class="card-img-top"
                                  alt="{{ product.title }}">
                             <div class="card-body">
-                                <h5 class="card-title">{{ product.title }}</h5>
+                                <h5 class="card-title fs-6x">{{ product.title }}</h5>
                             </div>
                         </a>
                         <div class="card-footer">

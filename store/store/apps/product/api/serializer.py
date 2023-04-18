@@ -1,6 +1,13 @@
 from rest_framework import serializers
-from store.apps.product.models import Product, Category
+from store.apps.product.models import Product, Category, Brand
 from django.utils.text import slugify
+
+
+class BrandSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Brand
+        fields = ["name", "slug"]
+        read_only_fields = ["created_at", "updated_at"]
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -25,14 +32,16 @@ class ProductSerializer(serializers.ModelSerializer):
         max_value=float(9999.99),
         coerce_to_string=False,
     )
-    categories = CategorySerializer(many=True, read_only=True)
+    category = CategorySerializer(read_only=True)
+    brand = BrandSerializer(read_only=True)
 
     class Meta:
         model = Product
         fields = [
             "title",
             "slug",
-            "categories",
+            "category",
+            "brand",
             "description",
             "qty",
             "original_price",
