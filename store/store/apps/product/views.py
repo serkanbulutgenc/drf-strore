@@ -32,7 +32,7 @@ class ProductDetail(generic.DetailView):
     context_object_name = "product"
 
 
-class ProductCreate(LoginRequiredMixin, SuccessMessageMixin, generic.CreateView):
+class ProductCreate(SuccessMessageMixin, generic.CreateView):
     model = Product
     form_class = ProductForm
     template_name = "product/update.html"

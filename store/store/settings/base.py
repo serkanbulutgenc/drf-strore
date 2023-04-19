@@ -44,7 +44,9 @@ INSTALLED_APPS = [
     # 3rd Party Apps
     "rest_framework",
     "django_extensions",
-    'mptt',
+    "mptt",
+    "crispy_forms",
+    "crispy_bootstrap5",
     # User Apps
     "store.apps.product.apps.ProductConfig",
 ]
@@ -131,3 +133,7 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# Crispy Forms Settings
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
