@@ -1,11 +1,66 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils.translation import gettext as _
 from django.urls import reverse
-from store.apps.product.models import Product, Category
+from store.apps.product.models import Product
 from django.contrib import messages
 from .forms import ProductForm
+from django.views import generic
+from django.http import HttpResponse
+from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
+
+
+class ProductList(generic.ListView):
+    model = Product
+    template_name = "product/list.html"
+    context_object_name = "products"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["extra"] = "Extra data"
+        return context
+
+    def get_queryset(self):
+        return Product.active.order_by("-created_at")[:5]
+
+
+class ProductDetail(generic.DetailView):
+    model = Product
+    template_name = "product/detail.html"
+    context_object_name = "product"
+
+
+class ProductCreate(LoginRequiredMixin, SuccessMessageMixin, generic.CreateView):
+    model = Product
+    form_class = ProductForm
+    template_name = "product/update.html"
+    success_message = "Form has been saved successfully"
+    success_url = "/products/"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["action"] = "create"
+        return context
+
+    def post(self, request, *args, **kwargs) -> HttpResponse:
+        return super().post(request, *args, **kwargs)
+
+
+class ProductUpdate(generic.UpdateView):
+    model = Product
+    template_name = "product/update.html"
+    success_url = "/products/{id}/"
+    fields = [
+        "title",
+        "category",
+        "brand",
+        "description",
+        "original_price",
+        "sale_price",
+        "is_active",
+    ]
 
 
 def product_list_view(request):

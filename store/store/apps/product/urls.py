@@ -1,16 +1,16 @@
 from django.urls import path
 from .views import (
-    product_list_view,
-    product_detail_view,
-    product_update_view,
-    product_create_view,
+    ProductCreate,
+    ProductList,
+    ProductUpdate,
+    ProductDetail,
 )
 
 app_name = "product-web"
 
 urlpatterns = [
-    path("", product_list_view, name="list"),
-    path("create/", product_create_view, name="create"),
-    path("<int:pk>/", product_detail_view, name="detail"),
-    path("update/<int:pk>/", product_update_view, name="update"),
+    path("", ProductList.as_view(), name="list"),
+    path("create/", ProductCreate.as_view(), name="create"),
+    path("<int:pk>/", ProductDetail.as_view(), name="detail"),
+    path("update/<int:pk>/", ProductUpdate.as_view(), name="update"),
 ]

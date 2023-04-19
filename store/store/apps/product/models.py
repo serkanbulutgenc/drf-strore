@@ -9,6 +9,10 @@ from django.utils.text import slugify
 
 
 # Create your models here.
+UNIT = (("kg", "Kilogram"), ("number", "Number"), ("box", "Box"))
+TAXES = ((1.0, "%1"), (8.0, "%8"), (18.0, "%18"))
+
+
 class Brand(models.Model):
     name = models.CharField(_("Name"), max_length=50, help_text=_("Brand Name"))
     slug = models.SlugField(_("Slug"), max_length=50, help_text=_("Brand Slug"))
@@ -83,7 +87,7 @@ class Product(models.Model):
         help_text=_("Product Description"),
         validators=[MaxLengthValidator(1000)],
     )
-    qty = models.IntegerField(_("Quantity"), default=1, help_text=_("Product Quantity"))
+    # qty = models.IntegerField(_("Quantity"), default=1, help_text=_("Product Quantity"))
 
     original_price = models.DecimalField(
         _("Original Price"), max_digits=6, decimal_places=2, help_text=_("Product Price")
@@ -122,3 +126,41 @@ class Product(models.Model):
 
     def __str__(self):
         return f"{self.title}"
+
+
+class Stock(models.Model):
+    sku = models.CharField(
+        _("SKU"),
+        max_length=8,
+        unique=True,
+        help_text=_("Product SKU"),
+        validators=[MinLengthValidator(6)],
+    )
+    unit = models.CharField(_("Unit"), choices=UNIT, max_length=20, help_text=_("Unit"))
+    amount = models.SmallIntegerField(_("Amount"), default=1, help_text=_("Amount"))
+    unit_price = models.DecimalField(
+        _("Unit Price"), max_digits=5, decimal_places=2, help_text=_("Unit Price")
+    )
+    tax_rate = models.FloatField(_("Tax Rate"), choices=TAXES, help_text=_("Tax Rate"))
+    profit_rate = models.FloatField(_("Profit"), default=20, help_text=_("Profit Rate"))
+    product = models.OneToOneField(
+        Product,
+        verbose_name=_("Product"),
+        on_delete=models.CASCADE,
+        help_text=_("Product"),
+        related_name="stock",
+    )
+    created_at = models.DateTimeField(
+        _("Created At"), auto_now_add=True, editable=False, help_text=_("Created At")
+    )
+    updated_at = models.DateTimeField(
+        _("Updated At"), auto_now=True, editable=False, help_text=_("Updated At")
+    )
+
+    def __str__(self):
+        return f"{self.sku}"
+
+    class Meta:
+        ordering = ["-created_at"]
+        verbose_name = _("Stock List")
+        verbose_name_plural = _("Stock List")
