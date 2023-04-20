@@ -32,7 +32,7 @@ class ProductDetail(generic.DetailView):
     context_object_name = "product"
 
 
-class ProductCreate(SuccessMessageMixin, generic.CreateView):
+class ProductCreate(LoginRequiredMixin, SuccessMessageMixin, generic.CreateView):
     model = Product
     form_class = ProductForm
     template_name = "product/update.html"
@@ -49,18 +49,17 @@ class ProductCreate(SuccessMessageMixin, generic.CreateView):
 
 
 class ProductUpdate(generic.UpdateView):
+    form_class = ProductForm
     model = Product
     template_name = "product/update.html"
     success_url = "/products/{id}/"
-    fields = [
-        "title",
-        "category",
-        "brand",
-        "description",
-        "original_price",
-        "sale_price",
-        "is_active",
-    ]
+
+
+class ProductDelete(LoginRequiredMixin, SuccessMessageMixin, generic.DeleteView):
+    template_name = "product/confirm_delete.html"
+    model = Product
+    success_message = f"Product has been deleted succesfully"
+    success_url = "/products/"
 
 
 def product_list_view(request):

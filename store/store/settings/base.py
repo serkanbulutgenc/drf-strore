@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     "crispy_bootstrap5",
     # User Apps
     "store.apps.product.apps.ProductConfig",
+    "store.apps.account.apps.AccountConfig",
 ]
 
 MIDDLEWARE = [
@@ -137,3 +138,8 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # Crispy Forms Settings
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+# Accounts Setting
+LOGIN_REDIRECT_URL = "/products/"
+LOGIN_URL = "/account/login/"
+LOGOUT_REDIRECT_URL = "/products/"

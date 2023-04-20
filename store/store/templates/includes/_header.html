@@ -16,13 +16,7 @@
                     <a href="#" class="nav-link px-2 link-secondary">Overview</a>
                 </li>
                 <li>
-                    <a href="#" class="nav-link px-2 link-body-emphasis">Inventory</a>
-                </li>
-                <li>
-                    <a href="#" class="nav-link px-2 link-body-emphasis">Customers</a>
-                </li>
-                <li>
-                    <a href="#" class="nav-link px-2 link-body-emphasis">Products</a>
+                    <a href="{% url 'product-web:list' %}" class="nav-link px-2 link-body-emphasis">Products</a>
                 </li>
             </ul>
             <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
@@ -31,6 +25,7 @@
                        placeholder="Search..."
                        aria-label="Search">
             </form>
+            {% if user.is_authenticated %}
             <div class="dropdown text-end">
                 <a href="#"
                    class="d-block link-dark text-decoration-none dropdown-toggle"
@@ -44,7 +39,7 @@
                 </a>
                 <ul class="dropdown-menu text-small">
                     <li>
-                        <a class="dropdown-item" href="#">New project...</a>
+                        <a class="dropdown-item" href="#">{% if user.is_authenticated %}{{user.username}}{% else %}Not login{% endif %}</a>
                     </li>
                     <li>
                         <a class="dropdown-item" href="#">Settings</a>
@@ -56,10 +51,16 @@
                         <hr class="dropdown-divider">
                     </li>
                     <li>
-                        <a class="dropdown-item" href="#">Sign out</a>
+                        <a class="dropdown-item" href="{% url 'account:logout' %}">Sign out</a>
                     </li>
                 </ul>
             </div>
+            {% else %}
+            <div class="text-end">
+          <a href="{% url 'account:login' %}" class="btn btn-outline-primary me-2">Login</a>
+          <a href="#" class="btn btn-secondary">Sign-up</a>
+        </div>
+        {% endif %}
         </div>
     </div>
 </header>

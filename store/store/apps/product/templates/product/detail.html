@@ -27,7 +27,7 @@
                         </p>
                         <a href="{% url 'product-web:update' product.id %}"
                            class="btn btn-secondary btn-sm">Update</a>
-                        <a href="#" class="btn btn-danger btn-sm">Delete</a>
+                        <a href="{% url 'product-web:delete' pk=product.id %}" class="btn btn-danger btn-sm" onclick="confirm("Are you sure?")">Delete</a>
                     </div>
                 </div>
             </div>
