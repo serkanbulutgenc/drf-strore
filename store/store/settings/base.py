@@ -128,7 +128,10 @@ ACCOUNT_AUTHENTICATION_METHOD = "username_email"
 ACCOUNT_LOGOUT_REDIRECT_URL = "/products/"
 ACCOUNT_USERNAME_MIN_LENGTH = 3
 LOGIN_REDIRECT_URL = "/products/"
-ACCOUNT_FORMS = {"login": "store.apps.account.forms.LoginForm"}
+ACCOUNT_FORMS = {
+    "login": "store.apps.account.forms.CustomLoginForm",
+    "signup": "store.apps.account.forms.CustomSignupForm",
+}
 
 
 # Internationalization

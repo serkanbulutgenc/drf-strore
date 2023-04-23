@@ -12,7 +12,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
 
 
-class ProductList(generic.ListView):
+class ProductList(LoginRequiredMixin, generic.ListView):
     model = Product
     template_name = "product/list.html"
     context_object_name = "products"
