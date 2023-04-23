@@ -41,15 +41,19 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.sites",
     # 3rd Party Apps
     "rest_framework",
     "django_extensions",
     "mptt",
     "crispy_forms",
     "crispy_bootstrap5",
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
     # User Apps
     "store.apps.product.apps.ProductConfig",
-    "store.apps.account.apps.AccountConfig",
+    # "store.apps.account.apps.AccountConfig",
 ]
 
 MIDDLEWARE = [
@@ -112,6 +116,20 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    "django.contrib.auth.backends.ModelBackend",
+    # `allauth` specific authentication methods, such as login by e-mail
+    "allauth.account.auth_backends.AuthenticationBackend",
+]
+
+SITE_ID = 1
+ACCOUNT_AUTHENTICATION_METHOD = "username_email"
+ACCOUNT_LOGOUT_REDIRECT_URL = "/products/"
+ACCOUNT_USERNAME_MIN_LENGTH = 3
+LOGIN_REDIRECT_URL = "/products/"
+ACCOUNT_FORMS = {"login": "store.apps.account.forms.LoginForm"}
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
@@ -140,6 +158,6 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 # Accounts Setting
-LOGIN_REDIRECT_URL = "/products/"
-LOGIN_URL = "/account/login/"
-LOGOUT_REDIRECT_URL = "/products/"
+
+# LOGIN_URL = "/account/login/"
+# LOGOUT_REDIRECT_URL = "/products/"

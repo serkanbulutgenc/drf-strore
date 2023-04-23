@@ -20,5 +20,5 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("products/", include("store.apps.product.urls", namespace="product-web")),
     path("api/", include("store.apps.product.api.urls", namespace="product-api")),
-    path("account/", include("store.apps.account.urls", namespace="account")),
+    path("accounts/", include("allauth.urls")),
 ]

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags account %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col col-md-6 offset-md-3">
+      <div class="form_box my-5 py-5">
+
+        {%crispy form%}
+      </div>
+
+    </div>
+    
+  </div>
+</div>
+{% endblock content %}
