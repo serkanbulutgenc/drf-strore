@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'site_base.html' %}
 {% load mptt_tags %}
 {% block content %}
     <div class="container">
@@ -12,12 +12,11 @@
                         <p>
                             {% for cat in product.categories.all %}<span class="badge text-bg-secondary badge-sm">{{ cat }}</span>{% endfor %}
                         </p>
-                        <form  method="post">
+                        <form method="post">
                             {% csrf_token %}
-                                <p>Are you sure you want to delete "{{ object }}"?</p>
+                            <p>Are you sure you want to delete "{{ object }}"?</p>
                             <button class="btn btn-danger btn-sm" onclick="confirm("Are you sure?")">Yes. I'm Sure</button>
                         </form>
-                        
                     </div>
                 </div>
             </div>

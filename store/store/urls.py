@@ -21,4 +21,5 @@ urlpatterns = [
     path("products/", include("store.apps.product.urls", namespace="product-web")),
     path("api/", include("store.apps.product.api.urls", namespace="product-api")),
     path("accounts/", include("allauth.urls")),
+    path("dashboard/", include("store.apps.dashboard.urls", namespace="dashboard")),
 ]

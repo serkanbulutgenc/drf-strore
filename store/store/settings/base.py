@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     "allauth.socialaccount",
     # User Apps
     "store.apps.product.apps.ProductConfig",
+    "store.apps.dashboard.apps.DashboardConfig"
     # "store.apps.account.apps.AccountConfig",
 ]
 
@@ -123,10 +124,13 @@ AUTHENTICATION_BACKENDS = [
     "allauth.account.auth_backends.AuthenticationBackend",
 ]
 
+# Allauth Settings
 SITE_ID = 1
 ACCOUNT_AUTHENTICATION_METHOD = "username_email"
 ACCOUNT_LOGOUT_REDIRECT_URL = "/products/"
 ACCOUNT_USERNAME_MIN_LENGTH = 3
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = "optional"
 LOGIN_REDIRECT_URL = "/products/"
 ACCOUNT_FORMS = {
     "login": "store.apps.account.forms.CustomLoginForm",
@@ -159,8 +163,3 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # Crispy Forms Settings
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
-
-# Accounts Setting
-
-# LOGIN_URL = "/account/login/"
-# LOGOUT_REDIRECT_URL = "/products/"

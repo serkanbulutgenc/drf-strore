@@ -1,16 +1,15 @@
-{% extends 'base.html' %}
+{% extends 'site_base.html' %}
 {% load static %}
-{% block content %}
+{% block site_content %}
     <div class="container">
         <div class="row">
             <div class="col my-2">
                 <h1 class="text-secondary">Products</h1>
             </div>
         </div>
-        <hr/>
-        <h2></h2>
-        <div class="g-2 row row-cols-1 row-cols-lg-5 row-cols-md-3 row-cols-sm-2">            
-                {% for product in products %}
+        <hr />
+        <div class="g-2 row row-cols-1 row-cols-lg-5 row-cols-md-3 row-cols-sm-2">
+            {% for product in products %}
                 <div class="col">
                     <div class="card">
                         <a href="{% url 'product-web:detail' product.id %}"
@@ -26,14 +25,12 @@
                             <small class="text-body-secondary">{{ product.updated_at }}</small>
                         </div>
                     </div>
-                    </div>
-                    {%empty%}
-                    <div class="col">
-
-                        <p class="text-info fs fs-3"> No Products! </p>
-                    </div>
-                {% endfor %}
-            
+                </div>
+            {% empty %}
+                <div class="col">
+                    <p class="text-info fs fs-3">No Products!</p>
+                </div>
+            {% endfor %}
         </div>
     </div>
-{% endblock content %}
+{% endblock site_content %}

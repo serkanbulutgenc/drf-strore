@@ -1,0 +1,12 @@
+{% extends 'dashboard_base.html' %}
+{% block content %}
+    <div class="sidebar sidebar-dark sidebar-fixed" id="sidebar">
+        {% include 'includes/_sidebar_brand.html' %}
+        {% include 'includes/_sidebar_nav.html' %}
+    </div>
+    <div class="wrapper d-flex flex-column min-vh-100 bg-light">
+        {% include 'includes/_db_header.html' %}
+        {% include 'includes/_db_body.html' %}
+        {% include 'includes/_db_footer.html' %}
+    </div>
+{% endblock content %}

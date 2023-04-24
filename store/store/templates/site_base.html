@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% include 'includes/_header.html' %}
+    <main class="">
+        {% block site_content %}
+        {% endblock site_content %}
+    </main>
+    {% include 'includes/_footer.html' %}
+{% endblock content %}
+{% block extra_js %}
+    <script type="javascript">
+console.log('done')
+    </script
+{% endblock %}

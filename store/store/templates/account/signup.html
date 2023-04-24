@@ -1,19 +1,23 @@
-{% extends "base.html" %}
+{% extends "dashboard_base.html" %}
 {% load static crispy_forms_tags %}
 {% load i18n %}
-{% block head_title %}
-    {% trans "Signup" %}
+{% block title %}
+    {{ block.super }} | {% trans "Signup" %}
 {% endblock %}
 {% block content %}
-    <div class="container">
-        <div class="row">
-            <div class="col col-md-6 offset-md-3">
-                <div class="form_box my-5 py-5">
-                    <h1>{% trans "Sign Up" %}</h1>
-                    <p>
-                        {% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}
-                    </p>
-                    {% crispy form %}
+    <div class="bg-light min-vh-100 d-flex flex-row align-items-center">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="card mb-4 mx-4">
+                        <div class="card-body p-4">
+                            <h1>{% trans "Sign Up" %}</h1>
+                            <p>
+                                {% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}
+                            </p>
+                            {% crispy form %}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
